@@ -12,7 +12,7 @@ import java.util.List;
 @ApplicationScoped
 public class CompetenceService implements PanacheRepositoryBase<Competence, String> {
 
-    public List<Competence> findByUtilisateur(String utilisateurUuid){
+    public List<Competence> listByUtilisateur(String utilisateurUuid){
         return find("utilisateur.uuid", utilisateurUuid).list();
     }
 
@@ -39,7 +39,7 @@ public class CompetenceService implements PanacheRepositoryBase<Competence, Stri
         uuidList.forEach(this::deleteById);
     }
 
-    public void deleteByUtilisateur(Utilisateur utilisateur){
-        delete("utilisateur.uuid", utilisateur.uuid);
+    public void deleteByUtilisateur(String uuid){
+        delete("utilisateur.uuid", uuid);
     }
 }

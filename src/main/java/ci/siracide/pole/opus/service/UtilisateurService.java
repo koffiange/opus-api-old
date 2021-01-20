@@ -19,6 +19,8 @@ public class UtilisateurService implements PanacheRepositoryBase<Utilisateur, St
     MembreService membreService;
 
     @Inject
+    FormationService formationService;
+    @Inject
     ExperienceProService experienceProService;
 
     @Inject
@@ -43,11 +45,11 @@ public class UtilisateurService implements PanacheRepositoryBase<Utilisateur, St
     public UtilisateurDto findUtilisateurDtoById(String uuid){
         Utilisateur utilisateur = findById(uuid);
         List<ExperiencePro> experienceProList = experienceProService.findByUtilisateur(uuid);
-        List<Competence> competenceList = competenceService.findByUtilisateur(uuid);
-        List<Activite> activiteList = activiteService.findByUtilisateur(uuid);
-        List<OffreEmploi> offreEmploiList = offreEmploiService.findByUtilisateur(uuid);
-        List<OffreService> offreServiceList = offreServiceService.findByUtilisateur(uuid);
-        List<Business> businessList = businessService.findByUtilisateur(uuid);
+        List<Competence> competenceList = competenceService.listByUtilisateur(uuid);
+        List<Activite> activiteList = activiteService.listByUtilisateur(uuid);
+        List<OffreEmploi> offreEmploiList = offreEmploiService.listByUtilisateur(uuid);
+        List<OffreService> offreServiceList = offreServiceService.listByUtilisateur(uuid);
+        List<Business> businessList = businessService.listByUtilisateur(uuid);
 
         return new UtilisateurDto(utilisateur, competenceList,
                                   experienceProList, activiteList,
@@ -61,11 +63,12 @@ public class UtilisateurService implements PanacheRepositoryBase<Utilisateur, St
 
     public void persistUtilisateurDto(UtilisateurDto utilisateurDto){
         utilisateurDto.utilisateur.persist();
+        formationService.persistMany(utilisateurDto.formationList, utilisateurDto.utilisateur);
         experienceProService.persistMany(utilisateurDto.experienceProList, utilisateurDto.utilisateur);
         competenceService.persistMany(utilisateurDto.competenceList, utilisateurDto.utilisateur);
-        activiteService.persistMany(utilisateurDto.activiteList, utilisateurDto.utilisateur);
-        offreEmploiService.persistMany(utilisateurDto.offreEmploiList, utilisateurDto.utilisateur);
-        offreServiceService.persistMany(utilisateurDto.offreServiceList, utilisateurDto.utilisateur);
+        // activiteService.persistMany(utilisateurDto.activiteList, utilisateurDto.utilisateur);
+        // offreEmploiService.persistMany(utilisateurDto.offreEmploiList, utilisateurDto.utilisateur);
+        // offreServiceService.persistMany(utilisateurDto.offreServiceList, utilisateurDto.utilisateur);
         businessService.persistMany(utilisateurDto.businessList, utilisateurDto.utilisateur);
         if(utilisateurDto.communaute != null)
             membreService.persist(utilisateurDto.utilisateur, utilisateurDto.communaute);
@@ -73,13 +76,13 @@ public class UtilisateurService implements PanacheRepositoryBase<Utilisateur, St
 
     public void deleteUtilisateurDto(String uuid){
         Utilisateur utilisateur = Utilisateur.findById(uuid);
-        experienceProService.deleteByUtilisateur(utilisateur);
-        competenceService.deleteByUtilisateur(utilisateur);
-        activiteService.deleteByUtilisateur(utilisateur);
-        offreEmploiService.deleteByUtilisateur(utilisateur);
-        offreServiceService.deleteByUtilisateur(utilisateur);
-        businessService.deleteByUtilisateur(utilisateur);
-        membreService.deleteByUtilisateur(utilisateur);
+        experienceProService.deleteByUtilisateur(uuid);
+        competenceService.deleteByUtilisateur(uuid);
+        activiteService.deleteByUtilisateur(uuid);
+        offreEmploiService.deleteByUtilisateur(uuid);
+        offreServiceService.deleteByUtilisateur(uuid);
+        businessService.deleteByUtilisateur(uuid);
+        membreService.deleteByUtilisateur(uuid);
 
         utilisateur.delete();
     }
@@ -92,6 +95,7 @@ public class UtilisateurService implements PanacheRepositoryBase<Utilisateur, St
             old.genre = utilisateur.genre;
             old.contactPrincipal = utilisateur.contactPrincipal;
             old.contactSecondaire = utilisateur.contactSecondaire;
+            old.adresse = utilisateur.adresse;
             old.dateNaissance = utilisateur.dateNaissance;
             old.email = utilisateur.email;
             old.motDePasse = utilisateur.motDePasse;

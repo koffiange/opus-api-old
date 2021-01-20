@@ -11,7 +11,7 @@ import java.util.List;
 @ApplicationScoped
 public class BusinessService implements PanacheRepositoryBase<Business, String> {
 
-    public List<Business> findByUtilisateur(String utilisateurUuid){
+    public List<Business> listByUtilisateur(String utilisateurUuid){
         return find("utilisateur.uuid", utilisateurUuid).list();
     }
 
@@ -47,7 +47,7 @@ public class BusinessService implements PanacheRepositoryBase<Business, String> 
         uuidList.forEach(this::deleteById);
     }
 
-    public void deleteByUtilisateur(Utilisateur utilisateur){
-        delete("utilisateur.uuid", utilisateur.uuid);
+    public void deleteByUtilisateur(String uuid){
+        delete("utilisateur.uuid", uuid);
     }
 }

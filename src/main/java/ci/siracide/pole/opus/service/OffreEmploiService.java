@@ -12,7 +12,7 @@ import java.util.List;
 @ApplicationScoped
 public class OffreEmploiService implements PanacheRepositoryBase<OffreEmploi, String> {
 
-    public List<OffreEmploi> findByUtilisateur(String utilisateurUuid){
+    public List<OffreEmploi> listByUtilisateur(String utilisateurUuid){
         return find("utilisateur.uuid", utilisateurUuid, Sort.descending("createdDate")).list();
     }
 
@@ -41,7 +41,7 @@ public class OffreEmploiService implements PanacheRepositoryBase<OffreEmploi, St
         uuidList.forEach(this::deleteById);
     }
 
-    public void deleteByUtilisateur(Utilisateur utilisateur){
-        delete("utilisateur.uuid", utilisateur.uuid);
+    public void deleteByUtilisateur(String uuid){
+        delete("utilisateur.uuid", uuid);
     }
 }

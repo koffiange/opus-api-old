@@ -28,7 +28,7 @@ public class MembreService implements PanacheRepositoryBase<Membre,String> {
         delete("communaute.uuid", communaute.uuid);
     }
 
-    public void deleteByUtilisateur(Utilisateur utilisateur){
-        delete("utilisateur.uuid", utilisateur.uuid);
+    public void deleteByUtilisateur(String uuid){
+        delete("utilisateur.uuid", uuid);
     }
 }

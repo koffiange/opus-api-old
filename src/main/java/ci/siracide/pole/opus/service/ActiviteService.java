@@ -11,7 +11,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class ActiviteService implements PanacheRepositoryBase<Activite, String> {
-    public List<Activite> findByUtilisateur(String utilisateurUuid){
+    public List<Activite> listByUtilisateur(String utilisateurUuid){
         return find("utilisateur.uuid", utilisateurUuid, Sort.descending("createdDate")).list();
     }
 
@@ -38,7 +38,7 @@ public class ActiviteService implements PanacheRepositoryBase<Activite, String> 
         uuidList.forEach(this::deleteById);
     }
 
-    public void deleteByUtilisateur(Utilisateur utilisateur){
-        delete("utilisateur.uuid", utilisateur.uuid);
+    public void deleteByUtilisateur(String uuid){
+        delete("utilisateur.uuid", uuid);
     }
 }

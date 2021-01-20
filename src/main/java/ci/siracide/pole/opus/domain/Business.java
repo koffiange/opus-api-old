@@ -1,5 +1,6 @@
 package ci.siracide.pole.opus.domain;
 
+import ci.siracide.pole.opus.enumeration.Domaine;
 import ci.siracide.pole.opus.enumeration.TypeCommunaute;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Business extends BaseEntity{
     public String libelle;
     public String description;
-    public String domaine;
+    public Domaine domaine;
     public String logo;
     public String contactPrincipal;
     public String contactSecondaire;

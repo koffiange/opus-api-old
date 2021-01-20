@@ -1,4 +1,4 @@
-package ci.siracide.pole.opus.resource;
+package ci.siracide.pole.opus.resource.v1;
 
 import ci.siracide.pole.opus.domain.ExperiencePro;
 import ci.siracide.pole.opus.domain.Utilisateur;

@@ -7,6 +7,7 @@ import java.util.List;
 public class UtilisateurDto {
     public Utilisateur utilisateur;
     public Communaute communaute;
+    public List<Formation> formationList;
     public List<Competence> competenceList;
     public List<ExperiencePro> experienceProList;
     public List<Activite> activiteList;

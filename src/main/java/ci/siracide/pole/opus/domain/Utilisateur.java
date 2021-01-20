@@ -2,6 +2,7 @@ package ci.siracide.pole.opus.domain;
 
 import ci.siracide.pole.opus.enumeration.Genre;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import java.time.LocalDate;
@@ -15,8 +16,10 @@ public class Utilisateur extends BaseEntity {
     public LocalDate dateNaissance;
     public String email;
     public String motDePasse;
+    @Column(unique = true)
     public String contactPrincipal;
     public String contactSecondaire;
+    public String adresse;
     @Lob
     public String photoProfil;
     @Lob
