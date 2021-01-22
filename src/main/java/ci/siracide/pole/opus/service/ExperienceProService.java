@@ -11,7 +11,7 @@ import java.util.List;
 @ApplicationScoped
 public class ExperienceProService implements PanacheRepositoryBase<ExperiencePro, String>{
     public List<ExperiencePro> findByUtilisateur(String utilisateurUuid){
-        return find("utilisateur.uuid", utilisateurUuid, Sort.descending("dateDebut")).list();
+        return list("utilisateur.uuid", utilisateurUuid);
     }
 
     public void persistMany(List<ExperiencePro> experienceProList, Utilisateur utilisateur){

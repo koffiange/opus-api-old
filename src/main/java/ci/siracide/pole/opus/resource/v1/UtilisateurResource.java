@@ -20,6 +20,12 @@ public class UtilisateurResource {
     UtilisateurService utilisateurService;
 
     @GET
+    @Path("/dto/{uuid}")
+    public UtilisateurDto findDtoById(@PathParam("uuid") String uuid){
+        return utilisateurService.findUtilisateurDtoById(uuid);
+    }
+
+    @GET
     public List<Utilisateur> listAll(){
         return utilisateurService.listAll();
     }
@@ -37,7 +43,7 @@ public class UtilisateurResource {
 
     @DELETE
     @Path("/dto/{uuid}")
-    public void delete(String uuid){
+    public void delete(@PathParam("uuid") String uuid){
         utilisateurService.deleteUtilisateurDto(uuid);
     }
 }

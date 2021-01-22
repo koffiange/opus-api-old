@@ -12,7 +12,7 @@ import java.util.List;
 @ApplicationScoped
 public class ActiviteService implements PanacheRepositoryBase<Activite, String> {
     public List<Activite> listByUtilisateur(String utilisateurUuid){
-        return find("utilisateur.uuid", utilisateurUuid, Sort.descending("createdDate")).list();
+        return list("utilisateur.uuid", utilisateurUuid);
     }
 
     public void persistMany(List<Activite> activiteList, Utilisateur utilisateur){

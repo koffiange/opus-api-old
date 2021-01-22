@@ -2,9 +2,7 @@ package ci.siracide.pole.opus.domain;
 
 import ci.siracide.pole.opus.enumeration.Genre;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -12,6 +10,7 @@ import java.time.LocalDateTime;
 public class Utilisateur extends BaseEntity {
     public String nom;
     public String prenoms;
+    @Enumerated(EnumType.STRING)
     public Genre genre;
     public LocalDate dateNaissance;
     public String email;

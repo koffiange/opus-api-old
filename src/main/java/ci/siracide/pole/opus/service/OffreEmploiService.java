@@ -13,7 +13,7 @@ import java.util.List;
 public class OffreEmploiService implements PanacheRepositoryBase<OffreEmploi, String> {
 
     public List<OffreEmploi> listByUtilisateur(String utilisateurUuid){
-        return find("utilisateur.uuid", utilisateurUuid, Sort.descending("createdDate")).list();
+        return list("utilisateur.uuid", utilisateurUuid);
     }
 
     public void persistMany(List<OffreEmploi> offreEmploiList, Utilisateur utilisateur){
